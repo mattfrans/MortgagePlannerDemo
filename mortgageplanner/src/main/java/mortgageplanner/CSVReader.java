@@ -1,6 +1,6 @@
-// CSVReader.java
 package mortgageplanner;
 import com.opencsv.bean.CsvToBeanBuilder;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -14,7 +14,9 @@ public class CSVReader {
         String path = args[0];
     
         try {
-            List<Prospect> prospects = new CsvToBeanBuilder(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))
+            //Read CSV file
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
+            List<Prospect> prospects = new CsvToBeanBuilder(reader)
                 .withType(Prospect.class)
                 .withSkipLines(1)
                 .build()
