@@ -18,7 +18,7 @@ public class CSVReaderTest {
 
         // Check that the output contains the expected text
         String output = outContent.toString();
-        assertTrue(output.contains("Prospect 1: Juha want to borrow 1000.00"));
+        assertTrue(output.contains("Prospect 1: Juha wants to borrow 1000.00"));
 
         // Reset System.out to its original stream
         System.setOut(System.out);
