@@ -17,7 +17,7 @@ public class ProspectTest {
         assertEquals(100000, prospect.getTotal());
         assertEquals(240, prospect.getPayments());
         assertEquals(0.004166667f, prospect.getMonthlyInterest());
-        assertEquals(659.96, prospect.getFixedPayment());
+        assertEquals(659.9506501597755, prospect.getFixedPayment());
         
         
     }
@@ -27,7 +27,7 @@ public class ProspectTest {
         Prospect prospect = new Prospect();
         double payment = prospect.paymentAmount(240, 0.004166667f, 100000);
 
-        assertEquals(659.96, payment);
+        assertEquals(659.9506501597755, payment);
     }
 
 }

@@ -1,5 +1,6 @@
 package mortgageplanner;
 
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 
 import com.opencsv.bean.CsvBindByPosition;
@@ -125,6 +126,9 @@ public class Prospect {
 	}
 	
 	public String toString(int prospectNr) {
-        return "Prospect "+prospectNr+": "+getName()+" wants to borrow "+df.format(total)+" €"+ " for a period of "+years+" years and pay "+df.format(fixedPayment)+" € each month.";
-    }
+    	String str = "Prospect "+prospectNr+": "+getName()+" wants to borrow "+df.format(total)+" €"+ " for a period of "+years+" years and pay "+df.format(fixedPayment)+" € each month.";
+    	byte[] ptext = str.getBytes(StandardCharsets.ISO_8859_1); 
+    	String value = new String(ptext, StandardCharsets.UTF_8); 
+    	return value;
+	}
 }
