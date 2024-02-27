@@ -1,10 +1,13 @@
 package mortgageplanner;
 
+import java.text.DecimalFormat;
+
 import com.opencsv.bean.CsvBindByPosition;
 
 
 public class Prospect {
 	private static final int MONTHS_IN_YEAR=12;
+	private static final DecimalFormat df = new DecimalFormat("#.00");
 	
 	@CsvBindByPosition(position = 0)
 	private String name;
@@ -29,7 +32,7 @@ public class Prospect {
     }
 
 	// method for calculating the monthly fixed payment 
-	private double paymentAmount(int payments, float monthlyInterest, double total) {
+	public double paymentAmount(int payments, float monthlyInterest, double total) {
 		// (1+i)^n  i is monthly interest and n is payments, factor
 		double curr = 1;
 		for(int i=0; i<payments;i++) {
@@ -122,8 +125,6 @@ public class Prospect {
 	}
 	
 	public String toString(int prospectNr) {
-		return "Prospect "+prospectNr+": "+name+" wants to borrow "+total+" €"+ " for a period of "+years+" years and pay "+fixedPayment+" € each month.";
-	}
-
-	
+        return "Prospect "+prospectNr+": "+getName()+" wants to borrow "+df.format(total)+" €"+ " for a period of "+years+" years and pay "+df.format(fixedPayment)+" € each month.";
+    }
 }
