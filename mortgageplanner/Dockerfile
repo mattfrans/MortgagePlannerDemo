@@ -1,26 +1,36 @@
-# Use a base image with Maven and a JDK installed
-FROM maven:3.8.4-openjdk-17-slim AS build
+# Start with a base image containing Java runtime and Maven
+FROM maven:3.9.6-eclipse-temurin-11-alpine
 
-# Set the working directory in the Docker image
-WORKDIR /app
+# Make source folder
+RUN mkdir -p /usr/src/app
 
-# Copy the pom.xml file into the Docker image
+WORKDIR /usr/src/app
+
+# Unset MAVEN_CONFIG
+ENV MAVEN_CONFIG=""
+
+# Copy maven executable to the image
+COPY mvnw .
+COPY .mvn .mvn
+
+# Copy the POM
 COPY pom.xml .
 
-# Download dependencies as specified in pom.xml
-RUN mvn dependency:go-offline
+# Fetch all dependencies
+RUN ./mvnw dependency:go-offline -B
 
-# Copy the rest of the application source code
-COPY src /app/src
+# Copy other source files
+COPY src src
 
-# Build the application
-RUN mvn package
+# Build application
+RUN ./mvnw package
 
-# Use a base image with a JRE installed for running the application
-FROM openjdk:17-jre
+# Specifies port to expose
+EXPOSE 8080
 
-# Copy the built application from the build stage
-COPY --from=build /app/target/*.jar /app.jar
+# Add the application's .jar to the container
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
-# Run the application
-CMD ["java", "-jar", "/app.jar"]
+# Run the .jar file 
+ENTRYPOINT ["java","-jar","/app.jar"]
