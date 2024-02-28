@@ -23,26 +23,10 @@ public class Prospect {
     
     private int payments = years*MONTHS_IN_YEAR;
     private float monthlyInterest = (interest/100)/MONTHS_IN_YEAR;
-    private double fixedPayment = paymentAmount(payments,monthlyInterest,total); 
+    private double fixedPayment;
     
     private void calculate(){
-        payments = years * MONTHS_IN_YEAR;
-        monthlyInterest = (interest / 100) / MONTHS_IN_YEAR;
-        fixedPayment = paymentAmount(payments, monthlyInterest, total);
-    }
-
-    // method for calculating the monthly fixed payment 
-    public double paymentAmount(int payments, float monthlyInterest, double total) {
-        // (1+i)^n  i is monthly interest and n is payments, factor
-        double curr = 1;
-        for(int i=0; i<payments;i++) {
-            float a = monthlyInterest + 1;
-            curr = curr*a;
-        }
-        double b = total*((monthlyInterest*curr)/(curr-1));
-        
-        return b;
-        
+        fixedPayment = Calculator.calculateFixedPayment(total, interest, years);
     }
     
     public String getName() {
@@ -81,7 +65,9 @@ public class Prospect {
     }
 
     public double getFixedPayment() {
+        calculate();
         return fixedPayment;
+
     }
 
     public void setFixedPayment(double fixedPayment) {

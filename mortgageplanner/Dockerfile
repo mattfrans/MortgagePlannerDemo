@@ -1,5 +1,5 @@
 # Use a base image with Maven and a JDK installed
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM maven:3.8.4-openjdk-21-slim AS build
 
 # Set the working directory in the Docker image
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY src /app/src
 RUN mvn package
 
 # Use a base image with a JRE installed for running the application
-FROM openjdk:17-jre
+FROM openjdk:21-jre
 
 # Copy the built application from the build stage
 COPY --from=build /app/target/*.jar /app.jar
