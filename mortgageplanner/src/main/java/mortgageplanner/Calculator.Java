@@ -1,5 +1,6 @@
 // Calculator.java
 package mortgageplanner;
+import mortgageplanner.Calculator;
 
 public class Calculator {
     private static final int MONTHS_IN_YEAR = 12;
