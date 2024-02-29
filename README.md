@@ -5,6 +5,8 @@ To run download or clone the repository and compile with maven (mvn compile) and
 1.You need java installed and added to PATH, you also need maven
 2.Navigate on command line, power shell or some other terminal. Compile with the command 'mvn compile', then run with 'mvn exec:java'. You can also run unit tests with 'mvn test'.
 
+Docker:
+https://hub.docker.com/r/aaaaaaaaoooooooooaaaaaaaa/mortgageplanner
+
 TODO: 
-Dockerization
 Web interface Publication in a cloud service
