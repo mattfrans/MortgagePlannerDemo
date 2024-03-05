@@ -51,7 +51,7 @@ public class CSVReader {
 
     private static List<String> parseLine(String line) {
         List<String> values = new ArrayList<>();
-        if (line == null || line.trim().isEmpty()) {
+        if (line == null || line.trim().isEmpty() || line.trim().equals(".")) {
             return values; // return empty list for empty lines
         }
         Pattern pattern = Pattern.compile("\"([^\"]*)\"|(?<=,|^)([^,]*)(?:,|$)");
