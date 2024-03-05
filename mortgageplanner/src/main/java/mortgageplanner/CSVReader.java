@@ -30,6 +30,9 @@ public class CSVReader {
             if (values.isEmpty()) {
                 continue; // skip empty lines
             }
+            if (line.trim().equals(".")) {
+                break; // stop processing when a line with just a dot is encountered
+            }
             Prospect prospect = new Prospect();
             prospect.setName(values.get(0));
             prospect.setTotal(Double.parseDouble(values.get(1)));
